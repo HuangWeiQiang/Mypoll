@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  answer_r: MyString
+  answer_l: MyString
+  image_r: MyString
+  image_l: MyString
+  count_r: 1
+  count_l: 1
+  star: 1
+  content: MyString
+  state: 1
+
+two:
+  answer_r: MyString
+  answer_l: MyString
+  image_r: MyString
+  image_l: MyString
+  count_r: 1
+  count_l: 1
+  star: 1
+  content: MyString
+  state: 1
