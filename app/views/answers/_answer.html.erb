@@ -1,0 +1,35 @@
+<div class="row" id="answer_block">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-8">
+				<div class="row">
+					<div class="col-sm-8"><h3>留言板</h3></div>
+					<div class="clo-sm-4">
+						<!--"Like It : <strong>#{@question.star}</strong>"-->
+						<%= link_to "Like it #{@question.star}", question_star_path(question_id: params[:question_id]),
+						            class: "btn btn-default", id: "star_count", remote:true %>
+					</div>
+				</div>
+				<table class="table">
+					<% @comments.each do |comment| %>
+						<tr>
+							<td><%= comment.content %></td>
+						</tr>
+					<% end %>
+				</table>
+
+				<%= form_for @comment, url: comment_path, method: :post, remote: true do |f| %>
+					<%= f.hidden_field :answer_id, value: "#{params[:l_or_r]}" %>
+					<!--TODO user_id-->
+					<%= f.hidden_field :user_id, value: 1 %>
+					<%= f.text_area :content, class: "form-control" %>
+					<%= f.submit :提交评论, class: "btn btn-success" %>
+				<% end %>
+			</div>
+			<div class="col-sm-4">
+				<%= link_to :喜欢这个题目, root_path, class: "btn btn-danger" %> <br>
+				<%= link_to :next, root_path, class: "btn btn-success" %>
+			</div>
+		</div>
+	</div>
+</div>
