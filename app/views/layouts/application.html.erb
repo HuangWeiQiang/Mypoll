@@ -21,9 +21,10 @@
 					<%= link_to image_tag('logo.jpg'), root_path %>
 				</div>
 				<div class="col-sm-2 col-sm-offset-8" id="sign_in_and_login">
-						<%= link_to 'sign in', root_path %>
+						<%= link_to 'sign up', new_user_registration_path %>
 						or
-						<%= link_to :login, root_path %>
+						<%= link_to 'sing in', new_user_session_path %>
+						<%= link_to 'sing out', destroy_user_session_path, method: :delete %>
 				</div>
 			</div>
 		  <hr>

@@ -11,7 +11,13 @@ class QuestionsController < ApplicationController
 	end
 
 	def new
+		@question = Question.new
+		@categories_name = Category.all.collect {|p| [p.name, p.id]}
+	end
 
+	def create
+		@question = Question.new(question_params)
+		@question.save
 	end
 
 	def answer
@@ -42,6 +48,14 @@ class QuestionsController < ApplicationController
 		end
 	end
 
+	def next
+		@category = Question.find_by(params[:question_id]).category
+		@questions = @category.questions
+
+		@next_question = select_random(@questions, 1)
+		redirect_to question_path(@next_question)
+	end
+
 	private
 	def render_index
 		if admin?
@@ -49,5 +63,9 @@ class QuestionsController < ApplicationController
 		else
 			render 'questions/_user_index'
 		end
+	end
+
+	def question_params
+
 	end
 end
