@@ -2,7 +2,7 @@
 	<div class="row">
 		<% @categories.each do |category| %>
 			<div class="col-md-4">
-				<%= link_to image_tag("categories/#{category.image}",
+				<%= link_to image_tag(CategoryAvatarUploader,
 				                      class: 'img-responsive'), category_question_path %>
 			</div>
 		<% end %>

@@ -1,1 +1,9 @@
 $("<%= escape_javascript(render @answer) %>").replaceAll("#answer_block")
+var roll_px = $(document).height();
+$(document).ready(
+    $('html, body, .content').animate(
+        {
+            scrollTop: roll_px
+        }, 300
+    )
+)

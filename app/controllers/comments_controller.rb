@@ -3,10 +3,11 @@ class CommentsController < ApplicationController
 		@comment = Comment.new(comment_params)
 		@comment.save!
 		@answer = @comment.answer
+		@question = @answer.question
 		@comments = @answer.comments
 		respond_to do |format|
-			format.html{}
-			format.js{}
+			format.html{ @answer }
+			format.js{ @answer }
 		end
 	end
 	private

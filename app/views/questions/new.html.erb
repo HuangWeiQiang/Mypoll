@@ -5,13 +5,38 @@
 	<div class="row">
 		<div class="col-xs-12">
 			<%= form_for @question, class: "form-horizotal" do |f| %>
-					<div class="form_group form-group-lg">
-						<%= f.label :问题类别, class: 'col-xs-2 control-label', for: "formGroupInputLarge" %>
-						<div class="col-xs-10">
-							<%= f.select :category, @categories_name, {},
-							             class: "form-control", id: "formGroupInputLarge" %>
+					<div class="form_group-lg">
+						<div class="row">
+							<div class="col-xs-12">
+								<%= f.label :类别, class: 'control-label', for: "categoryType" %>
+								<%= f.select :category_id, @categories_name, {},
+								             class: "form-control", id: "categoryType" %>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-12">
+								<%= f.label :问题, class: 'control-label' %>
+								<%= f.text_field :content, class: "form-control" %>
+							</div>
 						</div>
 					</div>
+					<div class="row">
+					<% @question.answers.each_with_index do |answer, index| %>
+						<div class="col-xs-6">
+							<%= f.fields_for 'answers_attributes[]', answer do |pf| %>
+									<div class="form-group-lg">
+										<%= pf.label "答案#{index+1}", class: 'control-label' %>
+										<%= pf.text_field :content, class: "form-control" %>
+									</div>
+									<div class="form-group-lg">
+										<%= pf.label :配图, class: 'control-label' %>
+										<%= pf.file_field :avatar %>
+									</div>
+							<% end %>
+						</div>
+					<% end %>
+					</div>
+					<%= f.submit :提交问题, class: 'btn btn-success' %>
 			<% end %>
 		</div>
 	</div>

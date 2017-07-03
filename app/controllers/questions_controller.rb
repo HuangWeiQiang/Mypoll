@@ -1,28 +1,37 @@
 class QuestionsController < ApplicationController
 	include ApplicationHelper
 	include QuestionsHelper
+
 	def index
 		@questions = Question.all
 	end
 
 	def show
-		@question = Question.find_by(params[:id])
+		@question = Question.find_by(id: params[:id])
 		@answers = select_random(@question.answers)
 	end
 
 	def new
 		@question = Question.new
 		@categories_name = Category.all.collect {|p| [p.name, p.id]}
+		2.times {@question.answers.build}
 	end
 
 	def create
 		@question = Question.new(question_params)
 		@question.save
+		2.times do |index|
+			answer = Answer.new(answer_params[:answers_attributes][index])
+			answer.question_id = @question.id
+			answer.save
+			uploader = AvatarUploader.new(answer)
+			uploader.store!(answer.avatar)
+		end
 	end
 
 	def answer
-		@question = Question.find_by(params[:question_id])
-		@answer = @question.answers.find_by(id: params[:l_or_r])
+		@question = Question.find_by(id: params[:question_id])
+		@answer = Answer.find_by(id: params[:l_or_r])
 		@comment = Comment.new
 		@comments = @answer.comments
 		if @answer
@@ -39,7 +48,7 @@ class QuestionsController < ApplicationController
 	end
 
 	def star
-		@question = Question.find_by(params[:question_id])
+		@question = Question.find_by(id: params[:question_id])
 		@question.star += 1
 		@question.save
 		respond_to do |format|
@@ -49,7 +58,7 @@ class QuestionsController < ApplicationController
 	end
 
 	def next
-		@category = Question.find_by(params[:question_id]).category
+		@category = Question.find_by(id: params[:question_id]).category
 		@questions = @category.questions
 
 		@next_question = select_random(@questions, 1)
@@ -66,6 +75,10 @@ class QuestionsController < ApplicationController
 	end
 
 	def question_params
+		params.require(:question).permit(:category_id, :content)
+	end
 
+	def answer_params
+		params.require(:question).permit(answers_attributes: [:content, :avatar])
 	end
 end

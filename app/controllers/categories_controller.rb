@@ -1,8 +1,28 @@
 class CategoriesController < ApplicationController
 	include ApplicationHelper
+	def new
+		@category = Category.new
+	end
+
+	def create
+		@category = Category.new(category_params)
+		@category.state = 1
+		@category.save
+	end
+
 	def index
 		@categories = Category.all
 		render_index
+	end
+
+	def edit
+		@category = Category.find(params[:id])
+	end
+
+	def update
+		@category = Category.find(params[:id])
+		@category.update(category_params)
+		@category.save
 	end
 	private
 	def render_index
@@ -11,5 +31,9 @@ class CategoriesController < ApplicationController
 		else
 			render 'categories/_user_index'
 		end
+	end
+
+	def category_params
+		params.require(:category).permit(:name, :image)
 	end
 end

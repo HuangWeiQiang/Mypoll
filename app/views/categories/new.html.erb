@@ -1,0 +1,12 @@
+<p>新的类别</p>
+<%= form_for @category do |f| %>
+		<div class="form-group-lg">
+			<%= f.label '类别名称', class: 'control-label' %>
+			<%= f.text_field :name, class: 'form-control' %>
+		</div>
+		<div class="form-group-lg">
+			<%= f.label :配图, class: 'control-label' %>
+			<%= f.file_field :image %>
+		</div>
+		<%= f.submit '提交',  class: 'btn btn-primary' %>
+<% end %>
