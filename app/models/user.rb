@@ -6,4 +6,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 	mount_uploader :avatar, AvatarUploader
+
+	before_destroy do |user|
+		user.comments.destroy_all
+	end
 end
