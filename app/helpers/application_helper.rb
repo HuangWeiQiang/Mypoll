@@ -1,6 +1,6 @@
 module ApplicationHelper
 	def admin?
-		return false unless sign_in?
+		return false unless is_sign_in?
 		user = User.find_by(id: session["warden.user.user.key"][0][0])
 		ability = Ability.new(user)
 		return ability.can?(:manage, :all)
