@@ -3,13 +3,19 @@
 		<div class = "col-sm-2">
 			<%= link_to image_tag('logo.jpg'), root_path %>
 		</div>
-		<div class="col-sm-2 col-sm-offset-8" id="sign_in_and_login">
-			<% if is_sign_in? %>
-				<%= link_to 'sign out', destroy_user_session_path, method: :delete %>
-			<% else %>
-				<%= link_to 'sign in', new_user_session_path %>or
-				<%= link_to 'sign up', new_user_registration_path %>
-			<% end %>
+		<div class = "col-sm-2 col-sm-offset-8" id="right">
+				<% if is_sign_in? %>
+						<%= link_to destroy_user_session_path, class: 'btn btn-danger', method: :delete do %>
+								<%= fa_icon 'sign-out' %> 退出
+						<% end %>
+				<% else %>
+						<%= link_to new_user_session_path, class:'btn btn-primary' do %>
+								<%= fa_icon 'user-circle' %> 登陆
+						<% end %>
+					<%= link_to new_user_registration_path, class: 'btn btn-primary' do %>
+								<%= fa_icon 'sign-in' %> 注册
+						<% end %>
+				<% end %>
 		</div>
 	</div>
 	<hr>
