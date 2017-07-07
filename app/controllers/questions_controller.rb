@@ -75,15 +75,12 @@ class QuestionsController < ApplicationController
 		redirect_to questions_path
 	end
 
-	private
-	def render_index
-		if admin?
-			render 'questions/_admin_index'
-		else
-			render 'questions/_user_index'
-		end
+	def category_questions
+		@questions = Category.find(params[:category_id]).questions
+		render 'index'
 	end
 
+	private
 	def question_params
 		params.require(:question).permit(:category_id, :content)
 	end
