@@ -15,22 +15,30 @@ class QuestionsController < ApplicationController
 	end
 
 	def new
-		@question = Question.new
-		@categories_name = Category.all.collect {|p| [p.name, p.id]}
-		2.times {@question.answers.build}
+		initialize_new_question_instance_variables
 	end
 
 	def create
+		@error_message = {}
 		@question = Question.new(question_params)
-		@question.save
+		@question_error = @question.errors unless @question.save
 		2.times do |index|
-			answer = Answer.new(answer_params[:answers_attributes][index])
+			answer = Answer.new(answer_params[index])
 			answer.question_id = @question.id
-			answer.save
+			@error_message.merge!({index => answer.errors}) unless answer.save
 			uploader = AvatarUploader.new(answer)
 			uploader.store!(answer.avatar)
 		end
-		redirect_to categories_path
+
+
+
+		if @error_message.empty? && @question_error.nil?
+			redirect_to categories_path
+		else
+			@question.destroy
+			initialize_new_question_instance_variables(question_params, answer_params)
+			render 'new'
+		end
 	end
 
 	def answer
@@ -86,6 +94,12 @@ class QuestionsController < ApplicationController
 	end
 
 	def answer_params
-		params.require(:question).permit(answers_attributes: [:content, :avatar])
+		params.require(:question).permit(answers_attributes: [:content, :avatar])[:answers_attributes]
+	end
+
+	def initialize_new_question_instance_variables(question_param = nil, answer_param = [])
+		@question = Question.new(question_param)
+		@categories_name = Category.all.collect {|p| [p.name, p.id]}
+		2.times{|index| @question.answers.build(answer_param[index])}
 	end
 end

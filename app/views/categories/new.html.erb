@@ -1,7 +1,14 @@
-<p>新的类别</p>
+<h1>新的类别</h1>
 <%= form_for @category do |f| %>
 		<div class="form-group-lg">
 			<%= f.label '类别名称', class: 'control-label' %>
+			<% if @category.errors.any? %>
+					<ul>
+						<% @category.errors.full_messages.each do |msg| %>
+								<li style="color: red"><%= msg %></li>
+						<% end %>
+					</ul>
+			<% end %>
 			<%= f.text_field :name, class: 'form-control' %>
 		</div>
 		<div class="form-group-lg">
