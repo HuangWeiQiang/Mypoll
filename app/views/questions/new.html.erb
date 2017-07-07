@@ -4,13 +4,13 @@
 	</div>
 	<div class="row">
 		<div class="col-xs-12">
-			<%= form_for @question, class: "form-horizotal" do |f| %>
+			<%= form_for @question, class: 'form-horizotal', runat: 'server' do |f| %>
 					<div class="form_group-lg">
 						<div class="row">
 							<div class="col-xs-12">
-								<%= f.label :类别, class: 'control-label', for: "categoryType" %>
+								<%= f.label :类别, class: 'control-label', for: 'categoryType' %>
 								<%= f.select :category_id, @categories_name, {},
-								             class: "form-control", id: "categoryType" %>
+								             class: 'form-control', id: 'categoryType' %>
 							</div>
 						</div>
 						<div class="row">
@@ -29,8 +29,9 @@
 										<%= pf.text_field :content, class: "form-control" %>
 									</div>
 									<div class="form-group-lg">
+										<%= image_tag '',id: "blah#{index}" , class: 'img-thumbnail' %> <br>
 										<%= pf.label :配图, class: 'control-label' %>
-										<%= pf.file_field :avatar %>
+										<%= pf.file_field :avatar , onchange: "loadFile(event, #{index})" %>
 									</div>
 							<% end %>
 						</div>
@@ -41,5 +42,3 @@
 		</div>
 	</div>
 </div>
-
-
