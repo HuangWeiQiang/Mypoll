@@ -37,7 +37,7 @@
 								<% end %>
 							</div>
 							<div class="col-sm-4">
-								<%= button_tag "还有#{answer.count}和小伙伴和你选择同一边😄",
+								<%= button_tag "还有#{answer.count-1}和小伙伴和你选择同一边😄",
 								               class: "btn btn-success" %>
 								<%= link_to :下一个, question_next_path(@question.id), class: "btn btn-success btn-lg" %>
 							</div>
