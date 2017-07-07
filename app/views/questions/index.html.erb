@@ -1,0 +1,12 @@
+<table class="table">
+	<% @questions.each do |question| %>
+			<% answers = question.answers %>
+		<tr>
+			<td><%= question.content %></td>
+			<td><%= answers[0].content %></td>
+			<td><%= answers[1].content %></td>
+			<td><%= question.category.name %></td>
+			<td><%= link_to :删除, question_path(question), method: :delete, class: 'btn btn-danger' %></td>
+		</tr>
+	<% end %>
+</table>

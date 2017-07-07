@@ -5,3 +5,5 @@
 #
 #   movies = Movie.post([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.post(name: 'Luke', movie: movies.first)
+Role.create(name: 'admin')
+Role.create(name: 'user')

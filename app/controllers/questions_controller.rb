@@ -2,7 +2,10 @@ class QuestionsController < ApplicationController
 	include ApplicationHelper
 	include QuestionsHelper
 
+	load_and_authorize_resource
+
 	def index
+		authorize! :manage, @questions
 		@questions = Question.all
 	end
 
@@ -63,6 +66,12 @@ class QuestionsController < ApplicationController
 
 		@next_question = select_random(@questions, 1)
 		redirect_to question_path(@next_question)
+	end
+
+	def destroy
+		@question = Question.find_by(id: params[:id])
+		@question.destroy
+		redirect_to questions_path
 	end
 
 	private

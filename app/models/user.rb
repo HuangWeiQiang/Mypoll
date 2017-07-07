@@ -7,6 +7,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 	mount_uploader :avatar, AvatarUploader
 
+  after_create do |user|
+		user.add_role :user
+  end
+
 	before_destroy do |user|
 		user.comments.destroy_all
 	end
