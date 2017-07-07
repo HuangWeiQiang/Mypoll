@@ -30,6 +30,7 @@ class QuestionsController < ApplicationController
 			uploader = AvatarUploader.new(answer)
 			uploader.store!(answer.avatar)
 		end
+		redirect_to categories_path
 	end
 
 	def answer

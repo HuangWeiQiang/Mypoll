@@ -8,6 +8,7 @@ class CategoriesController < ApplicationController
 		@category = Category.new(category_params)
 		@category.state = 1
 		@category.save
+		redirect_to categories_path
 	end
 
 	def index

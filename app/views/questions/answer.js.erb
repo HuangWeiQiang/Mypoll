@@ -1,4 +1,6 @@
 $("<%= escape_javascript(render @answer) %>").replaceAll("#answer_block")
+
+//跳到留言部分
 var roll_px = $("#answer_block").offset().top;
 $(document).ready(
 		    $('html, body, .content').animate(
@@ -6,4 +8,12 @@ $(document).ready(
 						    scrollTop: roll_px
 				    }, 300
 		    )
+)
+
+//使图片链接无效
+$("#poll_block > div > a").attr('href', "#")
+$("#poll_block > div > a").click(
+    function () {
+		    alert("已经投过票了😄")
+    }
 )
