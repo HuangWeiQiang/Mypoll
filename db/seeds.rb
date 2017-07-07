@@ -7,3 +7,10 @@
 #   Character.post(name: 'Luke', movie: movies.first)
 Role.create(name: 'admin')
 Role.create(name: 'user')
+admin_user = User.new(
+										 email: 'admin@admin.com',
+                     password: 'admin000',
+                     password_confirmation: 'admin000'
+)
+admin_user.save!
+admin_user.add_role :admin
