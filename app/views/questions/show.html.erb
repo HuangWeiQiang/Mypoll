@@ -5,18 +5,22 @@
 		</div>
 	</div>
 	<div class="row" style="position: relative" id="poll_block">
+		<div class="col-xs-1" ></div>
 		<% @answers.each do |answer| %>
-				<div class="col-xs-6 box" >
+				<div class="col-xs-5 box" >
 					<%= link_to question_answer_path(question_id: params[:id], l_or_r: answer.id),
 					            remote:true  do %>
-						<%= image_tag("#{answer.avatar}", id: "imag-answer", class: "img-thumbnail") %>
+						<%= image_tag("#{answer.avatar}", id: 'imag-answer', class: 'img-thumbnail') %>
 						<div class="box-content">
 							<h2 class="title"><%= answer.content %></h2>
 						</div>
 					<% end %>
 				</div>
 		<% end %>
-		<%= image_tag "or.png", id: "imag-or", class: "img-circle" %>
+		<%= image_tag 'or.png', id: 'imag-or', class: 'img-circle' %>
+		<%= link_to question_next_path(params[:id]), class: 'btn btn-success btn-sm', id: 'next-question' do %>
+				<%= fa_icon('chevron-right') %>
+		<% end %>
 	</div>
 	<hr>
 	<!--空的div用来显示answer-->

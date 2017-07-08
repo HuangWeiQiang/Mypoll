@@ -91,6 +91,12 @@
   transform: rotate(0deg);
 }
 
+#next-question {
+  position: fixed;
+  bottom: 60%;
+  right: auto;
+}
+
 @media screen and (max-width: 990px) {
   .box {
     margin-bottom: 20px;
