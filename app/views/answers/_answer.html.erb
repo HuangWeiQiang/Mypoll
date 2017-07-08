@@ -8,7 +8,8 @@
 						<%= link_to question_star_path(@question.id),
 						            class: "btn btn-default", id: "star_count", remote:true do %>
 							<%= fa_icon('star') %>
-							<%= "Like it #{@question.star}" %>
+							<%= "Like it" %>
+							<span class="badge"><%= "#{@question.star}" %></span>
 						<% end %>
 					</div>
 				</div>
