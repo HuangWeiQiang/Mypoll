@@ -76,3 +76,4 @@ bower.json
 app/views/users/
 public/upload/
 public/uploads/tmp/
+.idea/
